@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run samf/react-docker yarn test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "react-docker"
+  env: "ReactDocker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-788231001208"
+  bucket_path: "react-docker"
+  on:
+    branch: master
+  access_key_id: $aws-access-key
+  secret_access_key:
+    secure: "$aws-secret-key"
